@@ -9,23 +9,27 @@ public class Main {
 
         Encoder encoder = new Encoder();
         FilePath filePath = new FilePath();
-        int key = Integer.parseInt(args[2]);
+
         String text = Files.readString(Path.of(args[1]));
 
 
         if (args[0].equalsIgnoreCase("encode")) {
             Path outputFile = Path.of(filePath.filePathForEncoded(path));
 
+            int key = Integer.parseInt(args[2]);
+
             String encodedText = (encoder.encode(text, key));
             Files.writeString(outputFile, encodedText);
         } else if (args[0].equalsIgnoreCase("decode")) {
             Path outputFile = Path.of(filePath.filePathForDecoded(path));
 
+            int key = Integer.parseInt(args[2]);
+
             String decodedText = (encoder.decode(text, key));
             Files.writeString(outputFile, decodedText);
         } else if (args[0].equalsIgnoreCase("bruteforce")) {
             StaticAnalysis staticAnalysis = new StaticAnalysis();
-            String exampleText = Files.readString(Path.of("D:\\IdeaProject\\Module 1 Project\\Module 1 Project\\src\\Example.txt"));
+            String exampleText = Files.readString(Path.of(args[2]));
             Path outputFile = Path.of(filePath.filePathForBruteForce(path));
 
             int bruteForceKey = (staticAnalysis.bruteForce(text, exampleText));
